@@ -1,0 +1,10 @@
+{
+  "mcpServers": {
+    "chrome-broker": {
+      "url": "http://127.0.0.1:7331/mcp",
+      "headers": {
+        "Authorization": "Bearer <the same token configured on the daemon>"
+      }
+    }
+  }
+}

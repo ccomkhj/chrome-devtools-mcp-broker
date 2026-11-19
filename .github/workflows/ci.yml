@@ -1,0 +1,44 @@
+name: Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  unit-and-integration:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        node-version: ['22', '24']
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: npm
+      - run: npm ci
+      - run: npm test
+
+  real-chrome:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      # Google Chrome is preinstalled on GitHub's Ubuntu runners.
+      CHROME_PATH: /usr/bin/google-chrome
+      # Ubuntu's AppArmor policy can block Chrome's user-namespace sandbox on the runner.
+      # The runner is a disposable VM that only opens local test pages.
+      CHROME_NO_SANDBOX: '1'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - run: npm ci
+      - run: '"$CHROME_PATH" --version'
+      - run: npm run test:chrome

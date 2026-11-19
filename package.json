@@ -1,0 +1,50 @@
+{
+  "name": "chrome-devtools-mcp-broker",
+  "version": "0.1.0",
+  "description": "MCP server that gives each AI agent its own Chrome DevTools MCP worker and Chrome profile, so agents browse in parallel with bounded output",
+  "author": "Huijo Kim",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ccomkhj/chrome-devtools-mcp-broker.git"
+  },
+  "homepage": "https://github.com/ccomkhj/chrome-devtools-mcp-broker#readme",
+  "bugs": "https://github.com/ccomkhj/chrome-devtools-mcp-broker/issues",
+  "type": "module",
+  "engines": {
+    "node": ">=22.12.0"
+  },
+  "bin": {
+    "chrome-devtools-mcp-broker": "src/cli.js"
+  },
+  "files": [
+    "src/",
+    "docs/",
+    "CHANGELOG.md",
+    "SECURITY.md"
+  ],
+  "scripts": {
+    "start": "node src/cli.js",
+    "test": "node --test test/*.test.js",
+    "test:chrome": "node --test test/chrome.e2e.js",
+    "measure:schemas": "node examples/measure-schemas.js",
+    "demo": "node examples/parallel-agents.js"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.32.2",
+    "chrome-devtools-mcp": "1.13.0",
+    "zod": "^4.6.7"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "mcp-server",
+    "chrome-devtools-mcp",
+    "chrome",
+    "devtools",
+    "browser-automation",
+    "ai-agents",
+    "multi-agent",
+    "parallel"
+  ]
+}
